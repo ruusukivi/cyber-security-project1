@@ -1,0 +1,18 @@
+<h1>Sign up</h1>
+<form method="POST" action="{% url 'accounts:signup' %}">
+    {% csrf_token %}
+    <label for="username">New username:</label>
+    <br />
+    <input type="text" id="username" name="username" />
+    <br />
+    <label for="text">Password:</label>
+    <br />
+    <input type="password" id="password" name="password" />
+    <br />
+    <input type="hidden" id="next" name="next" value="{{ next }}" />
+    <br />
+    <input type="submit" value="Sign up">
+  </form>
+  {% if invalid %}
+  <p>Sign up failed. Try again.</p>
+  {% endif %}

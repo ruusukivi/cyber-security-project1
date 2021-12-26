@@ -1,12 +1,23 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout as django_logout
 
 def index(request):
-    return HttpResponse("accounts")
+    return redirect("/")
 
 def signup(request):
-    return HttpResponse("accounts")
+    if request.method == "GET":
+        return render(request, 'accounts/signup.html')
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        if not User.objects.filter(username=username):
+            user = User.objects.create_superuser(username, None, password)
+        if user is not None:
+            login(request, user)
+            return redirect("/")
+        else:
+            return redirect("/")
 
 def signin(request):
     if request.method == "GET":

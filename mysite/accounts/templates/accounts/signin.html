@@ -1,4 +1,6 @@
 <h1>Sign in</h1>
+No account yet? <a href="{% url 'accounts:signup' %}">Sign up</a>
+<br /><br />
 <form method="POST" action="{% url 'accounts:signin' %}">
     {% csrf_token %}
     <label for="username">Username:</label>
@@ -8,6 +10,7 @@
     <label for="text">Password:</label><br />
     <input type="password" id="password" name="password" /><br />
     <input type="hidden" id="next" name="next" value="{{ next }}" />
+    <br />
     <input type="submit" value="Sign in">
   </form>
   {% if invalid %}
