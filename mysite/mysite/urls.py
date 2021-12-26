@@ -20,5 +20,6 @@ from django.shortcuts import redirect
 urlpatterns = [
 path('', lambda request: redirect('polls/', permanent=False)),
 path('polls/', include('polls.urls')),
-path('admin/', admin.site.urls),
+path('accounts/', include('accounts.urls')),
+path('admin/', admin.site.urls)
 ]

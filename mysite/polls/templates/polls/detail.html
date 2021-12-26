@@ -1,4 +1,5 @@
-<h1>{{ question.question_text }}</h1>
+<h1>Polls app</h1>
+<h2>{{ question.question_text }}</h2>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -8,5 +9,6 @@
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
 {% endfor %}
+<br/>
 <input type="submit" value="Vote">
 </form>

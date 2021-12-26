@@ -1,0 +1,15 @@
+<h1>Sign in</h1>
+<form method="POST" action="{% url 'accounts:signin' %}">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <br />
+    <input type="text" id="username" name="username" />
+    <br />
+    <label for="text">Password:</label><br />
+    <input type="password" id="password" name="password" /><br />
+    <input type="hidden" id="next" name="next" value="{{ next }}" />
+    <input type="submit" value="Sign in">
+  </form>
+  {% if invalid %}
+  <p>Sign in failed. Try again.</p>
+  {% endif %}
