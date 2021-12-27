@@ -1,6 +1,6 @@
 # Cyber Security Base - Project 1
 
-## LINK: https://github.com/ruusukivi/cyber-security-project1
+LINK: https://github.com/ruusukivi/cyber-security-project1
 
 This Django app is created to demonstrate five mistakes found in OWASP Top Ten list updated 2021. The whole list can be found here https://owasp.org/www-project-top-ten/
 
