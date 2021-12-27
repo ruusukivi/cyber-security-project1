@@ -43,27 +43,6 @@ For rate-limiting at the auth backend level you can use for example https://pypi
 https://sharkbyte.ca/7-common-security-vulnerabilities-to-watch-for-in-your-django-app/)
 
 
-## FLAW 2: A07:2021 – Identification and Authentication Failures
-https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/
-
-Identification and Authentication Failures include flaws for example in session management, password policy and prevention of automated brute force attacks. 
-
-The poll app lacks all checks to prevent poor passwords. A user can create even a password with only one character.
-
-In addition, the app does not prevent brute force attacks by limiting authentication attemps. Django has in general quite robust authentication, but rate-limit is not a feature that you get out-of-box. 
-
-### Code link
-
-### How to fix
-
-Add a length requirement for passwords. The longer the better. Passwords should contain uppercase and lowercase letters, numbers and special symbols. Implement weak password checks. OWASP recommends testing new or changed passwords against the top 10,000 worst passwords list.
-
-For rate-limiting at the auth backend level you can use for example https://pypi.org/project/django-ratelimit-backend/ However, the latest release is from Aug 27th in 2018. There might be a a risk of another flaw from OWASP Top Ten List - A06:2021 – Vulnerable and Outdated Components
-
-### Learn more: 
-https://sharkbyte.ca/7-common-security-vulnerabilities-to-watch-for-in-your-django-app/)
-
-
 ## FLAW 3: A05:2021 – Security Misconfiguration
 https://owasp.org/Top10/A05_2021-Security_Misconfiguration/
 
