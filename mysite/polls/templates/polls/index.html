@@ -1,13 +1,6 @@
-<h1>Polls app</h1>
+{% extends "polls/base.html" %}
 
-{% if user.is_authenticated %}
-User: {{ user.get_username }} |
-<a href="{% url 'accounts:logout'%}">Logout</a>
-{% else %}
-<a href="{% url 'accounts:signin'%}?next={{request.path}}">Sign in</a>
-{% endif %}
-
-<h2>Polls available</h2>
+{% block content %}
 
 {% if latest_question_list %}
     <ul>
@@ -19,9 +12,35 @@ User: {{ user.get_username }} |
     <p>No polls are available.</p>
 {% endif %}
 
-<h2>Feedback</h2>
-<form action="{% url 'polls:index'%}" method="post">
+
+<h2>Read the latest feedback</h2>
+{% if feedback_list %}
+    <ul>
+    {% for feedback in feedback_list %}
+        <li>{{ feedback.text|safe }} - <i>{{ feedback.nickname }}</i></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+<h3>Give us feedback</h3>
+{% if user.is_authenticated %}
+<form action="{% url 'polls:feedback'%}" method="post">
     {% csrf_token %}
-    <input type="input" name="feedback"/>
+    <label>Nickname:</label><br />
+   <input name="nickname" value={{ user.get_username }}></input>
+   <br /><br />
+   <label>Message:</label><br />
+   <textarea size="35" name="text"></textarea>
+    <br /><br />
     <input type="submit" value="Send feedback"/>
 </form>
+{% else %}
+    <p>Want to send feedback? You need to <a href="{% url 'accounts:signin'%}?next={{request.path}}">sign in</a></p>
+{% endif %}
+
+
+{% endblock %}
+
+

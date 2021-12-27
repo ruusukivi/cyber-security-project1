@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Question, Choice
+from .models import Question, Choice, Feedback
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
@@ -15,6 +15,7 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoiceInline]
 
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(Feedback)
 
 
 

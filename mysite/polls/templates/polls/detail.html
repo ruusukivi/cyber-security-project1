@@ -1,4 +1,6 @@
-<h1>Polls app</h1>
+{% extends "polls/base.html" %}
+
+{% block content %}
 <h2>{{ question.question_text }}</h2>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -12,3 +14,4 @@
 <br/>
 <input type="submit" value="Vote">
 </form>
+{% endblock %}

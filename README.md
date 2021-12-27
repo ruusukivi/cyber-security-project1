@@ -42,3 +42,48 @@ For rate-limiting at the auth backend level you can use for example https://pypi
 ### Learn more: 
 https://sharkbyte.ca/7-common-security-vulnerabilities-to-watch-for-in-your-django-app/)
 
+
+## FLAW 2: A07:2021 – Identification and Authentication Failures
+https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/
+
+Identification and Authentication Failures include flaws for example in session management, password policy and prevention of automated brute force attacks. 
+
+The poll app lacks all checks to prevent poor passwords. A user can create even a password with only one character.
+
+In addition, the app does not prevent brute force attacks by limiting authentication attemps. Django has in general quite robust authentication, but rate-limit is not a feature that you get out-of-box. 
+
+### Code link
+
+### How to fix
+
+Add a length requirement for passwords. The longer the better. Passwords should contain uppercase and lowercase letters, numbers and special symbols. Implement weak password checks. OWASP recommends testing new or changed passwords against the top 10,000 worst passwords list.
+
+For rate-limiting at the auth backend level you can use for example https://pypi.org/project/django-ratelimit-backend/ However, the latest release is from Aug 27th in 2018. There might be a a risk of another flaw from OWASP Top Ten List - A06:2021 – Vulnerable and Outdated Components
+
+### Learn more: 
+https://sharkbyte.ca/7-common-security-vulnerabilities-to-watch-for-in-your-django-app/)
+
+
+## FLAW 3: A05:2021 – Security Misconfiguration
+https://owasp.org/Top10/A05_2021-Security_Misconfiguration/
+
+Security Misconfigurations refer to situations where the system has unnecessary out-dated or otherwise unsecure features enabled or users have more priviledges than they need. The system might not have the latest security features enabled or securily configured. Default passwords might be left unchanged.
+
+The app has at least two flaws related to misconfiguration. First, all users are created as superusers. This gives them access to the Django admin with unlimited rights. 
+
+In addition, when users send feedback, the app suggests to use their username as their nickname. Nickname is visible for every user. Now the potential attacker needs to figure out only user's password.
+
+The feedback form is meant only for the logged in users.  However, the form is only hidden from the index page. You would be able to send feedback by just calling the polls/feedback url with proper values.
+
+### Code link
+
+### How to fix
+
+You should have create_user() instead of create_superuser(). Basic users should have their own user group with proper rigths. 
+
+Feature suggesting username as a nickname should be removed. Maybe you could ask nickname already in sign up and make sure that a user can select her username as a nickname.
+
+Before feedback view in views.py you should use @login_required.
+
+
+
