@@ -64,5 +64,20 @@ Feature suggesting username as a nickname should be removed. Maybe you could ask
 
 Before feedback view in views.py you should use @login_required.
 
+## FLAW 4: A03:2021 – Injection
+https://owasp.org/Top10/A03_2021-Injection/
+
+Injection includes for example cross-site scripting and SQL injections. If the user-supplied data is not validated, the application is vulnerable to attacks. 
+
+The polls app has a feedback form with xss vulnerability. The product owner wanted to enable bolded text and hyper links in feedback messages. Developers solved the need by adding a safe tag in the form. User is now able to bold text and add links, but the app is also vulnerable for attacks. Users can add for example javascript code into the text. There is no validation in the API level.
+
+### Code link
+
+### How to fix
+
+Either you remove the support for bolded text and links or code a validator for the form text. It is fairly easy to recognize <b> tags and let them pass. Ensuring the links are safe is more difficult. Perhaps you could make a validator that permits only certain domains. Django has many build-in validators to utilize.
+
+### Learn more 
+https://docs.djangoproject.com/en/4.0/ref/validators/#built-in-validators 
 
 
